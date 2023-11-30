@@ -1,9 +1,6 @@
 import com.workintech.stackChallange.StackChallange;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +19,7 @@ public class Main {
         System.out.println(checkForPalindromeQueue("hello"));
         System.out.println(checkForPalindromeQueue("Don't node"));
 
-        System.out.println(decimalToBinary(15));
+        System.out.println(decimalToBinary(11));
     }
 
     public static boolean checkForPalindrome(String text) {
@@ -79,17 +76,22 @@ public class Main {
             return false;
         }
     }
-    public static String decimalToBinary(double number) {
-        String binary;
+    public static LinkedList<Integer> decimalToBinary(int number) {
 
-        while(true){
-            binary = (number % 2) + "" ;
-            number = Math.floor(number / 2);
-            if(number == 1){
-                binary += 1;
-                break;
-            }
+        Stack<Integer> reminderStack = new Stack<>();
+        LinkedList<Integer> result = new LinkedList<>();
+
+        while(number > 0){
+            int reminder = number % 2;
+            reminderStack.push(reminder);
+            number = number / 2;
         }
-        return binary;
+        Iterator<Integer> iterator = reminderStack.iterator();
+
+        while (iterator.hasNext()){
+            Integer binaryNum = iterator.next();
+            result.push(binaryNum);
+        }
+        return result;
     }
 }
